@@ -1,5 +1,4 @@
 #include "monty.h"
-extern monty_state ms;
 
 /**
 	* stack_push - pushes an element to the stack.

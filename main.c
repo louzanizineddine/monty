@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-monty_state ms = {NULL, NULL, NULL, 0, 1, 1};
+
 
 
 /**
@@ -15,11 +15,14 @@ monty_state ms = {NULL, NULL, NULL, 0, 1, 1};
 
 int main(int argc, char **argv)
 {
-	stack_t *stack = NULL;
+	stack_t *stack;
 	instruction_t instructions[] = {
 		{"push", stack_push},
 		{"pall", stack_pall},
 	};
+
+	stack = NULL;
+	ms.f = NULL;
 
 	check_file(argc, argv);
 

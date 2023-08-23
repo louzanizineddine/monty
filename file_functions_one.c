@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern monty_state ms;
+
 
 /**
  * read_file - reads the file and executes the instructions

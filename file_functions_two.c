@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "monty.h"
-extern monty_state ms;
+
 
 
 /**
@@ -37,7 +37,7 @@ int get_file_len(char *filename)
 
 
 /**
- * get_line - gets the line
+ * get_single_line - gets the line
  * @filename: name of the file
  * @line_number: line number
  * Return: line
