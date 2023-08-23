@@ -42,10 +42,20 @@ void treat_opcode(char *opcode, char *value)
 	int index;
 
 	index = get_instruction_index(opcode);
+	if (index == -1)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", ms.current_line, opcode);
+		exit(EXIT_FAILURE);
+	}
 	printf("instructino index = %d\n", index);
 
 	if (index == 0)
 	{
+		if (value == NULL || !isdigit(value))
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
+			exit(EXIT_FAILURE);
+		}
 		ms.value = atoi(value);
 	}
 	printf("ms.value = %d\n", ms.value);
