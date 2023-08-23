@@ -1,4 +1,6 @@
 #include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 extern monty_state ms;
 
@@ -16,7 +18,7 @@ void read_file(char *filename)
 
 	while (true)
 	{
-		line = get_line(filename, temp);
+		line = get_single_line(filename, temp);
 		if (line == NULL)
 			break;
 		printf("original line: %s\n", line);

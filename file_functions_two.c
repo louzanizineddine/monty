@@ -1,5 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "monty.h"
-
 extern monty_state ms;
 
 
@@ -42,7 +43,7 @@ int get_file_len(char *filename)
  * Return: line
  */
 
-char *get_line(char *filename, unsigned int line_number)
+char *get_single_line(char *filename, unsigned int line_number)
 {
 
 	FILE *file = fopen(filename, "r");

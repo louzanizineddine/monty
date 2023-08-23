@@ -15,15 +15,13 @@ monty_state ms = {NULL, NULL, NULL, 0, 1, 1};
 
 int main(int argc, char **argv)
 {
-
-	check_file(argc, argv);
-
 	stack_t *stack = NULL;
-
 	instruction_t instructions[] = {
 		{"push", stack_push},
 		{"pall", stack_pall},
 	};
+
+	check_file(argc, argv);
 
 	ms.instructions = instructions;
 	ms.stack = stack;

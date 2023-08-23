@@ -9,6 +9,7 @@
 
 void stack_pall(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp;
 
 	if (*stack == NULL)
 	{
@@ -16,9 +17,9 @@ void stack_pall(stack_t **stack, unsigned int line_number)
 		return;
 	}
 
-	stack_t *temp = *stack;
+	temp = *stack;
 
-	line_number = 9;
+	line_number++;
 	while (temp != NULL)
 	{
 

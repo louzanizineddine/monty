@@ -10,17 +10,18 @@ extern monty_state ms;
 void stack_push(stack_t **stack, unsigned int line_number)
 {
 
-	stack_t *new_head = (stack_t *)malloc(sizeof(stack_t));
+	stack_t *new_head, *current_head;
 
+	new_head = (stack_t *)malloc(sizeof(stack_t));
 	if (new_head == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	stack_t *current_head = *stack;
+	current_head = *stack;
 
-	line_number = 9;
+	line_number++;
 	new_head->n = ms.value;
 	new_head->next = NULL;
 	new_head->prev = current_head;
