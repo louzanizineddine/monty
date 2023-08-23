@@ -45,9 +45,10 @@ typedef struct monty_state_s
 {
 	FILE *f;
 	stack_t *stack;
-	instruction_t *instruction;
+	instruction_t *instructions;
 	int value;
 	unsigned int current_line;
+	int instructions_len;
 } monty_state;
 
 void check_file(int argc, char **argv);
@@ -58,5 +59,9 @@ void stack_pall(stack_t **stack, unsigned int line_number);
 void read_file(char *filename);
 char *get_line(char *filename, unsigned int line_number);
 int get_file_len(char *filename);
+char ** tokenize_line(char* line);
+void treat_opcode(char *opcode, char* value);
+int get_instruction_index(char *opcode);
 void trim(char *s);
+
 #endif

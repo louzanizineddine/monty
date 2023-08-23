@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-monty_state ms = {NULL, NULL, NULL, 0, 0};
+monty_state ms = {NULL, NULL, NULL, 0, 1, 1};
 
 
 /**
@@ -25,6 +25,9 @@ int main(int argc, char **argv)
 		{"pall", stack_pall},
 	};
 
+	ms.instructions = instructions;
+	ms.stack = &stack;
+	ms.instructions_len = 2;
 
 	read_file(argv[1]);
 	
@@ -32,17 +35,17 @@ int main(int argc, char **argv)
 	// stack->next = NULL;
 	// stack->prev = NULL;
 
-	ms.value = 5;
-	stack_push(&stack, 0);
-	ms.value = 10;
-	stack_push(&stack, 0);
-	ms.value = 50;
-	stack_push(&stack, 0);
+	// ms.value = 5;
+	// stack_push(&stack, 0);
+	// ms.value = 10;
+	// stack_push(&stack, 0);
+	// ms.value = 50;
+	// stack_push(&stack, 0);
 
-	ms.value = 80;
-	stack_push(&stack, 0);
+	// ms.value = 80;
+	// stack_push(&stack, 0);
 
 
-	stack_pall(&stack ,0);
+	// stack_pall(&stack ,0);
 	return (0);
 }
