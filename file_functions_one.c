@@ -79,6 +79,10 @@ void treat_opcode(char *opcode, char *value)
 	{
 		ms.instructions[index].f(&(ms.stack), ms.current_line);
 	}
+	if (index == 2)
+	{
+		ms.instructions[index].f(&(ms.stack), ms.current_line);
+	}
 }
 
 /**
