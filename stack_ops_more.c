@@ -44,9 +44,12 @@ void stack_add(stack_t **stack, unsigned int line_number)
 
 	temp = (*stack)->prev;
 	temp->n += (*stack)->n;
-	*stack = temp;
-	free(temp->next);
-	temp->next = NULL;
+	/*
+		* stack = temp;
+		free(temp->next);
+		temp->next = NULL;
+	*/
+	stack_pop(stack, line_number);
 }
 
 
