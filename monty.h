@@ -69,8 +69,8 @@ typedef struct monty_state_s
 extern monty_state ms;
 
 void stack_push(stack_t **stack, unsigned int line_number);
-void check_file(int argc, char **argv);
 void stack_pall(stack_t **stack, unsigned int line_number);
+void check_file(int argc, char **argv);
 void stack_pint(stack_t **stack, unsigned int line_number);
 void stack_pop(stack_t **stack, unsigned int line_number);
 void stack_swap(stack_t **stack, unsigned int line_number);
