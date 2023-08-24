@@ -25,7 +25,8 @@ void read_file(char *filename)
 			break;
 		}
 		tokens = tokenize_line(line);
-		if (tokens[0] == NULL || (strcmp(tokens[0], "#") == 0))		{
+		if (tokens[0] == NULL || tokens[0][0] == '#')
+		{
 			free(tokens);
 			free(line);
 			temp++;
