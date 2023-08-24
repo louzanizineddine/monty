@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	ms.instructions = instructions;
 	ms.stack = stack;
 	ms.instructions_len = 3;
-	ms.current_line = 1;
+	ms.current_line = 0;
 
 	read_file(argv[1]);
 	return (0);

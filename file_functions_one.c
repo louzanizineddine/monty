@@ -21,18 +21,17 @@ void read_file(char *filename)
 		line = get_single_line(filename, temp);
 		if (line == NULL)
 			break;
-		/*printf("line: %s\n", line);*/
 		tokens = tokenize_line(line);
 		if (tokens[0] == NULL)
 		{
 			free(tokens);
 			free(line);
 			temp++;
+			ms.current_line++;
 			continue;
 		}
 
 		treat_opcode(tokens[0], tokens[1]);
-
 		free(tokens);
 		free(line);
 		temp++;
@@ -49,10 +48,10 @@ void read_file(char *filename)
 
 void treat_opcode(char *opcode, char *value)
 {
-	int index, error;
+	int index, error = 0;
 
+	ms.current_line++;
 	index = get_instruction_index(opcode);
-	/*printf("index: %d\n", index);*/
 	if (index == -1)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", ms.current_line, opcode);
@@ -61,7 +60,13 @@ void treat_opcode(char *opcode, char *value)
 
 	if (index == 0)
 	{
-		if (value == NULL || string_to_int(value, &error) == -1)
+		if (value == NULL)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
+			exit(EXIT_FAILURE);
+		}
+		string_to_int(value, &error);
+		if (error == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
 			exit(EXIT_FAILURE);
@@ -74,7 +79,6 @@ void treat_opcode(char *opcode, char *value)
 	{
 		ms.instructions[index].f(&(ms.stack), ms.current_line);
 	}
-	ms.current_line++;
 }
 
 /**
