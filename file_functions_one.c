@@ -46,6 +46,8 @@ void read_file(char *filename)
  * treat_opcode - treats the opcode
  * @opcode: opcode
  * @value: value
+ * @tokens: array of tokens
+ * @line: line
  * Return: void
  */
 
