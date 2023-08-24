@@ -117,3 +117,22 @@ void stack_div(stack_t **stack, unsigned int line_number)
 	temp->n /= (*stack)->n;
 	stack_pop(stack, line_number);
 }
+
+void stack_pchar(stack_t **stack, unsigned int line_number)
+{
+	if ((*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		free_all(ms.opcode_tokens, ms.line);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+		free_all(ms.opcode_tokens, ms.line);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%c\n", (*stack)->next->n);
+}

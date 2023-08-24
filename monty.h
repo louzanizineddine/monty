@@ -92,5 +92,6 @@ int get_instruction_index(char *opcode);
 void trim(char *s);
 bool is_digit(char c);
 int string_to_int(const char *str, int *error);
+void stack_pchar(stack_t **stack, unsigned int line_number);
 
 #endif
