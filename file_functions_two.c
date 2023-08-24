@@ -91,8 +91,6 @@ void check_file(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("file name is %s\n", argv[1]);
-
 	f = fopen(argv[1], "r");
 
 	if (f == NULL)

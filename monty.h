@@ -67,9 +67,8 @@ extern monty_state ms;
 
 void check_file(int argc, char **argv);
 void stack_push(stack_t **stack, unsigned int line_number);
-
-
 void stack_pall(stack_t **stack, unsigned int line_number);
+void stack_nop(stack_t **stack, unsigned int line_number);
 void read_file(char *filename);
 char *get_single_line(char *filename, unsigned int line_number);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
@@ -78,5 +77,7 @@ char **tokenize_line(char *line);
 void treat_opcode(char *opcode, char *value);
 int get_instruction_index(char *opcode);
 void trim(char *s);
+bool is_digit(char c);
+int string_to_int(const char *str, int *error);
 
 #endif

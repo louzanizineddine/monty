@@ -21,10 +21,20 @@ void read_file(char *filename)
 		line = get_single_line(filename, temp);
 		if (line == NULL)
 			break;
-		printf("original line: %s\n", line);
+		/*printf("line: %s\n", line);*/
 		tokens = tokenize_line(line);
-		printf("%s %s\n", tokens[0], tokens[1]);
+		if (tokens[0] == NULL)
+		{
+			free(tokens);
+			free(line);
+			temp++;
+			continue;
+		}
+
 		treat_opcode(tokens[0], tokens[1]);
+
+		free(tokens);
+		free(line);
 		temp++;
 	}
 
@@ -39,27 +49,31 @@ void read_file(char *filename)
 
 void treat_opcode(char *opcode, char *value)
 {
-	int index;
+	int index, error;
 
 	index = get_instruction_index(opcode);
+	/*printf("index: %d\n", index);*/
 	if (index == -1)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", ms.current_line, opcode);
 		exit(EXIT_FAILURE);
 	}
-	printf("instructino index = %d\n", index);
 
 	if (index == 0)
 	{
-		if (value == NULL || !isdigit(value))
+		if (value == NULL || string_to_int(value, &error) == -1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
 			exit(EXIT_FAILURE);
 		}
 		ms.value = atoi(value);
+		ms.instructions[index].f(&(ms.stack), ms.current_line);
 	}
-	printf("ms.value = %d\n", ms.value);
-	ms.instructions[index].f(&(ms.stack), ms.current_line);
+
+	if (index == 1)
+	{
+		ms.instructions[index].f(&(ms.stack), ms.current_line);
+	}
 	ms.current_line++;
 }
 
@@ -95,14 +109,24 @@ int get_instruction_index(char *opcode)
 char **tokenize_line(char *line)
 {
 	char **arr = (char **)malloc(sizeof(char *) * 2);
-	char *token = strtok(line, " \t$");
+	char *token = strtok(line, " \n\t\a\b$");
+
+	if (token == NULL)
+	{
+		arr[0] = NULL;
+		arr[1] = NULL;
+		return (arr);
+	}
 
 	arr[0] = token;
-	token = strtok(NULL, " \t$");
+	token = strtok(NULL, " \n\t\a\b$");
 
+	if (token == NULL)
+	{
+		arr[1] = NULL;
+		return (arr);
+	}
 	arr[1] = token;
-
-
 	return (arr);
 }
 
