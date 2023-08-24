@@ -20,7 +20,10 @@ void read_file(char *filename)
 	{
 		line = get_single_line(filename, temp);
 		if (line == NULL)
+		{
+			free(line);
 			break;
+		}
 		tokens = tokenize_line(line);
 		if (tokens[0] == NULL)
 		{
@@ -31,7 +34,7 @@ void read_file(char *filename)
 			continue;
 		}
 
-		treat_opcode(tokens[0], tokens[1]);
+		treat_opcode(tokens[0], tokens[1], tokens, line);
 		free(tokens);
 		free(line);
 		temp++;
@@ -46,7 +49,7 @@ void read_file(char *filename)
  * Return: void
  */
 
-void treat_opcode(char *opcode, char *value)
+void treat_opcode(char *opcode, char *value, char **tokens, char *line)
 {
 	int index, error = 0;
 
@@ -55,6 +58,9 @@ void treat_opcode(char *opcode, char *value)
 	if (index == -1)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", ms.current_line, opcode);
+		free(tokens);
+		free(line);
+		stack_free();
 		exit(EXIT_FAILURE);
 	}
 
@@ -63,26 +69,27 @@ void treat_opcode(char *opcode, char *value)
 		if (value == NULL)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
+			free(tokens);
+			free(line);
+			stack_free();
 			exit(EXIT_FAILURE);
 		}
 		string_to_int(value, &error);
 		if (error == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ms.current_line);
+			free(line);
+			free(tokens);
+			stack_free();
 			exit(EXIT_FAILURE);
 		}
 		ms.value = atoi(value);
 		ms.instructions[index].f(&(ms.stack), ms.current_line);
 	}
-
 	if (index == 1)
-	{
 		ms.instructions[index].f(&(ms.stack), ms.current_line);
-	}
 	if (index == 2)
-	{
 		ms.instructions[index].f(&(ms.stack), ms.current_line);
-	}
 }
 
 /**
@@ -131,6 +138,7 @@ char **tokenize_line(char *line)
 
 	if (token == NULL)
 	{
+		free(token);
 		arr[1] = NULL;
 		return (arr);
 	}

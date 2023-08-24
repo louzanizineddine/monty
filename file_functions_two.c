@@ -98,6 +98,6 @@ void check_file(int argc, char **argv)
 		fprintf(stderr, "Error can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
+	ms.f = f;
 	fclose(f);
 }

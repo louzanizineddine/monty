@@ -34,5 +34,6 @@ int main(int argc, char **argv)
 	ms.current_line = 0;
 
 	read_file(argv[1]);
+	stack_free();
 	return (0);
 }

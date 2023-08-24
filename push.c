@@ -14,6 +14,7 @@ void stack_push(stack_t **stack, unsigned int line_number)
 	new_head = (stack_t *)malloc(sizeof(stack_t));
 	if (new_head == NULL)
 	{
+		stack_free();
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
@@ -80,4 +81,21 @@ void stack_pint(stack_t **stack, unsigned int line_number)
 
 	temp = *stack;
 	printf("%d\n", temp->n);
+}
+
+/**
+	* stack_free - frees the stack.
+	* Return: void
+*/
+
+void stack_free(void)
+{
+	stack_t *temp;
+
+	while (ms.stack != NULL)
+	{
+		temp = ms.stack;
+		ms.stack = ms.stack->prev;
+		free(temp);
+	}
 }
