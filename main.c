@@ -28,7 +28,6 @@ int main(int argc, char **argv)
 		{"div", stack_div},
 		{"mul", stack_mul},
 		{"mod", stack_mod},
-		{"pchar", stack_pchar}
 	};
 
 	stack = NULL;
