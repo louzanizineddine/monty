@@ -14,7 +14,7 @@ void stack_push(stack_t **stack, unsigned int line_number)
 	new_head = (stack_t *)malloc(sizeof(stack_t));
 	if (new_head == NULL)
 	{
-		stack_free();
+		free_all(ms.opcode_tokens, ms.line);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
@@ -76,12 +76,37 @@ void stack_pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_all(ms.opcode_tokens, ms.line);
 		exit(EXIT_FAILURE);
 	}
 
 	temp = *stack;
 	printf("%d\n", temp->n);
 }
+
+/**
+	* stack_pop - removes the top element of the stack.
+	* @stack: double pointer to the head of the stack.
+	* @line_number: line number of the instruction.
+*/
+
+
+void stack_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		free_all(ms.opcode_tokens, ms.line);
+		exit(EXIT_FAILURE);
+	}
+
+	temp = *stack;
+	*stack = (*stack)->prev;
+	free(temp);
+}
+
 
 /**
 	* stack_free - frees the stack.

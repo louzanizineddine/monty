@@ -20,6 +20,9 @@ int main(int argc, char **argv)
 		{"push", stack_push},
 		{"pall", stack_pall},
 		{"pint", stack_pint},
+		{"pop", stack_pop},
+		{"swap", stack_swap},
+		{"add", stack_add},
 		{"nop", stack_nop},
 	};
 
@@ -30,7 +33,7 @@ int main(int argc, char **argv)
 
 	ms.instructions = instructions;
 	ms.stack = stack;
-	ms.instructions_len = 4;
+	ms.instructions_len = 8;
 	ms.current_line = 0;
 
 	read_file(argv[1]);

@@ -50,6 +50,8 @@ typedef struct instruction_s
 	* @value: value of the instruction
 	* @current_line: current line of the file
 	* @instructions_len: length of the instructions array
+	* @opcode_tokens: tokens of the opcode
+	* @line: line
 */
 
 typedef struct monty_state_s
@@ -60,6 +62,8 @@ typedef struct monty_state_s
 	int value;
 	unsigned int current_line;
 	int instructions_len;
+	char **opcode_tokens;
+	char *line;
 } monty_state;
 
 extern monty_state ms;
@@ -68,7 +72,11 @@ void check_file(int argc, char **argv);
 void stack_push(stack_t **stack, unsigned int line_number);
 void stack_pall(stack_t **stack, unsigned int line_number);
 void stack_pint(stack_t **stack, unsigned int line_number);
+void stack_pop(stack_t **stack, unsigned int line_number);
+void stack_swap(stack_t **stack, unsigned int line_number);
+void stack_add(stack_t **stack, unsigned int line_number);
 void stack_nop(stack_t **stack, unsigned int line_number);
+void free_all(char **tokens, char *line);
 void stack_free(void);
 void read_file(char *filename);
 char *get_single_line(char *filename, unsigned int line_number);

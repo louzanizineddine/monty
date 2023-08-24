@@ -54,3 +54,17 @@ int string_to_int(const char *str, int *error)
 	*error = 0;
 	return (result * sign);
 }
+
+
+/**
+	* free_all - frees all memory
+	* @tokens: tokens
+	* @line: line
+*/
+
+void free_all(char **tokens, char *line)
+{
+	free(tokens);
+	free(line);
+	stack_free();
+}
