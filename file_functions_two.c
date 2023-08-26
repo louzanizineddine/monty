@@ -95,7 +95,7 @@ void check_file(int argc, char **argv)
 
 	if (f == NULL)
 	{
-		fprintf(stderr, "Error can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	ms.f = f;
